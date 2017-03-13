@@ -1,6 +1,5 @@
 package com.elsevier.education;
 
-import java.util.*;
 
 /**
 
@@ -13,7 +12,6 @@ public class Exercise3 {
 
 	public static class Person {
 	
-		private static Random generator = new java.util.Random();
 		private Integer id;
 		
 		public Person(int newId) {
@@ -21,7 +19,9 @@ public class Exercise3 {
 		}
 		
 		public int hashCode() {
-			return id * generator.nextInt();
+			//Random generation will fetch a different Hash code, so when multiplied with id we can't add twice
+			//It will be break the contract between hashCode & equals method
+			return id;
 		}
 		
 		public boolean equals(Object other) {

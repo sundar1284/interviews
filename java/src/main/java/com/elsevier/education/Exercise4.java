@@ -1,5 +1,7 @@
 package com.elsevier.education;
 
+import java.util.concurrent.atomic.LongAdder;
+
 /**
 
 TODO Is Counter thread-safe? If so, why, and if not, how can we fix it?
@@ -9,19 +11,20 @@ public class Exercise4 {
 
 	public static class Counter {
 		
-		private int count = 0;
+		private LongAdder count = new LongAdder();
 		
+		//LongAdder is preferred in high contention areas
 		public int increment() {
-			return ++count;
+			count.increment();
+			return count.intValue();
 		}
 		
 		public int getCount() {
-			return count;
+			return count.intValue();
 		}
 		
 		public void resetCount() {
-			count = 0;
+			count.reset();
 		}
-
 	}
 }
