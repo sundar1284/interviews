@@ -1,5 +1,6 @@
 package com.elsevier.education;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -7,36 +8,35 @@ import java.util.Set;
 TODO: Make this class immutable.
 
 */
-public class Exercise1 {
+public final class Exercise1 {
 
-	public static class Person {
+	//Making the class final to avoid extending this class
+	public static final class Person {
 		
-		private Set<String> phoneNumbers;
-		private String firstName;
-		private String lastName;
+		//Making class fields private & final so that the values can be assigned only once
+		private final Set<String> phoneNumbers = new HashSet<String>();
+		private final String firstName;
+		private final String lastName;
 		
-		public Person() {
+		public Person(String firstName, String lastName, String phoneNumber) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.phoneNumbers.add(phoneNumber);
 		}
 
 		public Set<String> getPhoneNumbers() {
-			return phoneNumbers;
-		}
-		public void setPhoneNumbers(Set<String> newPhoneNumbers) {
-			phoneNumbers = newPhoneNumbers;
+			//Returning a copy of Set
+			HashSet<String> retVal = new HashSet<String>();
+			retVal.addAll(phoneNumbers);
+			return retVal;
 		}
 		
 		public String getFirstName() {
 			return firstName;
 		}
-		public void setFirstName(String newName) {
-			firstName = newName;
-		}
 		
 		public String getLastName() {
 			return lastName;
-		}
-		public void setLastName(String newName) {
-			lastName = newName;
 		}
 	}
 }
